@@ -21,7 +21,15 @@ spec:
             - containerPort: 5000
           env:
             - name: MONGO_DB_URL
-              value: "mongodb://$(MONGODB_SERVICE_SERVICE_HOST):$(MONGODB_SERVICE_PORT_27017_TCP_PORT)/urlshortener"
+              valueFrom:
+                  configMapKeyRef:
+                    name: mongodb-configmap
+                    key: database_url
+            - name: MONGO_DB_PORT
+              valueFrom:
+                  configMapKeyRef:
+                    name: mongodb-configmap
+                    key: database_port
 ---
 apiVersion: v1
 kind: Service

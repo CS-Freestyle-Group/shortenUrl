@@ -4,6 +4,7 @@ metadata:
   name: mongodb-configmap
 data:
   database_url: mongodb-service
+  database_port: "27017"
 ---
 apiVersion: apps/v1
 kind: Deployment
