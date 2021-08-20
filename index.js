@@ -4,7 +4,7 @@ const app = express()
 
 
 const connection = require('./config/db.config')
-connection.once('open',() => console.log('DB Connected'))
+connection.once('open',() => console.log(`DB Connected to ${process.env.MONGO_DB_URL}`))
 connection.once('error',() => console.log('Error'))
 
 app.use(express.json({
