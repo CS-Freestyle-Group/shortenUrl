@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shorten-deployment
+  labels:
+    app: shorten
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shorten
+  template:
+    metadata:
+      labels:
+        app: shorten
+    spec:
+      containers:
+        - name: shorten
+          image: /*images ที่ได้จากการ build*/
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_DB_URL
+              value: "mongodb://$(MONGODB_SERVICE_SERVICE_HOST):$(MONGODB_SERVICE_PORT_27017_TCP_PORT)/urlshortener"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shorten-service
+spec:
+  selector:
+    app: shorten
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+
