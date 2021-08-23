@@ -4,13 +4,13 @@ const router = express.Router()
 
 const validUrl = require('valid-url')
 const shortid = require('shortid')
-
+const ip = require('ip')
 const Url = require('../models/Url')
 
 //@route    POST /api/url/shorten
 //@desc     Create short URL
 
-const baseUrl = 'http:localhost:5000'
+const baseUrl = ip.address() || 'http://localhost:5000'
 router.post('/shorten', async(req,res)=>{
     const {longUrl} = req.body
     //check base url

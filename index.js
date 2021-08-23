@@ -1,5 +1,5 @@
 const express = require("express")
-
+const ip = require("ip")
 const app = express()
 
 
@@ -14,4 +14,4 @@ app.use('/',require('./routes/redirect'))
 app.use('/api/url',require('./routes/url'))
 
 const PORT = process.env.PORT || 5000
-app.listen(PORT, console.log(`server started, listening PORT ${PORT}`))
+app.listen(PORT, console.log(`server started, listening PORT ${PORT} my url/ip is ${ip.address()}`))
