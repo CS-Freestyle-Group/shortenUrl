@@ -10,6 +10,4 @@ RUN npm install --production --silent && mv node_modules ../
 
 COPY . .
 
-EXPOSE 5000
-
 CMD ["node", "index.js"]
